@@ -1,39 +1,131 @@
+<% layout("/layouts/boilerplate") %>
 
-   <% layout("/layouts/boilerplate") %>
-<div class="row mt-3">
-  <div class="col-8 offset-2">
-    <h3>Edit your Listing</h3>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate
-        class="needs-validation"
-        enctype="multipart/form-data"
-      >
+<style>
+  .edit-container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    color: white !important;
+  }
 
-      
+  .edit-container h3 {
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    color: white;
+  }
+
+  .form-label {
+    color: white !important;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-control, .form-select {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+    border-radius: 10px;
+    padding: 10px 15px;
+    transition: 0.3s ease;
+  }
+
+  .form-control:focus, .form-select:focus {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: #fe424d !important;
+    box-shadow: 0 0 10px rgba(254, 66, 77, 0.3);
+    outline: none;
+    color: white !important;
+  }
+  .form-select option {
+    background-color: #2c3e50;
+    color: white;
+  }
+
+
+  .img-preview {
+    border-radius: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+
+ 
+  .edit-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+    padding: 0.8rem 3rem !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    border-radius: 12px !important;
+    transition: 0.3s;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .edit-btn:hover {
+    background-color: #e33640 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(254, 66, 77, 0.4);
+  }
+
+  .valid-feedback, .invalid-feedback {
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  }
+</style>
+
+<div class="row">
+  <div class="col-8 offset-2 edit-container">
+    <h3><i class="fa-solid fa-pen-to-square"></i> Edit your Listing</h3>
+    
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-control" required/>
-         <div class="valid-feedback">Tittle looks good!</div>
+        <div class="valid-feedback">Title looks good!</div>
       </div>
 
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea name="listing[description]" class="form-control" required><%= listing.description %></textarea>
+        <textarea name="listing[description]" class="form-control" rows="4" required><%= listing.description %></textarea>
         <div class="invalid-feedback">Please enter a short description</div>
       </div>
 
-      <div class="mb-2">
-  Original Listing Image <br />
-  <img 
-    src="<%= originalImageUrl %>" 
-    class="img-thumbnail mt-2" 
-    style="width: 250px; height: 150px; object-fit: cover;" 
-  />
-</div>
-      
-<div class="mb-3">
-  <label for="image" class="form-label">Upload New Image</label>
-  <input name="listing[image][url]"  type="file" class="form-control"/>
-</div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label">Original Image Preview</label> <br />
+          <img src="<%= originalImageUrl %>" class="img-preview mt-2 mb-2" style="width: 100%; height: 180px; object-fit: cover;" />
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-end">
+          <label for="image" class="form-label">Upload New Image</label>
+          <input name="listing[image][url]" type="file" class="form-control"/>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select name="listing[category]" class="form-select" id="category" required>
+          <option value="Trending" <%= listing.category == "Trending" ? "selected" : "" %>>Trending</option>
+          <option value="Rooms" <%= listing.category == "Rooms" ? "selected" : "" %>>Rooms</option>
+          <option value="Iconic Cities" <%= listing.category == "Iconic Cities" ? "selected" : "" %>>Iconic Cities</option>
+          <option value="Mountains" <%= listing.category == "Mountains" ? "selected" : "" %>>Mountains</option>
+          <option value="Castles" <%= listing.category == "Castles" ? "selected" : "" %>>Castles</option>
+          <option value="Amazing Pools" <%= listing.category == "Amazing Pools" ? "selected" : "" %>>Amazing Pools</option>
+          <option value="Camping" <%= listing.category == "Camping" ? "selected" : "" %>>Camping</option>
+          <option value="Farms" <%= listing.category == "Farms" ? "selected" : "" %>>Farms</option>
+          <option value="Arctic" <%= listing.category == "Arctic" ? "selected" : "" %>>Arctic</option>
+          <option value="Domes" <%= listing.category == "Domes" ? "selected" : "" %>>Domes</option>
+          <option value="Boats" <%= listing.category == "Boats" ? "selected" : "" %>>Boats</option>
+        </select>
+        <div class="invalid-feedback">Please select a category</div>
+      </div>
 
       <div class="row">
         <div class="mb-3 col-md-4">
@@ -45,7 +137,7 @@
         <div class="mb-3 col-md-8">
           <label for="country" class="form-label">Country</label>
           <input name="listing[country]" value="<%= listing.country %>" type="text" class="form-control" required/>
-           <div class="invalid-feedback">Country name should be valid</div>
+          <div class="invalid-feedback">Country name should be valid</div>
         </div>
       </div>
 
@@ -55,7 +147,7 @@
         <div class="invalid-feedback">Location should be valid</div>
       </div>
 
-      <button class="btn btn-dark edit-btn mt-3 mb-5">Edit</button>
+      <button class="btn edit-btn mt-3 mb-2">Save Changes</button>
     </form>
   </div>
 </div>

@@ -1,20 +1,82 @@
-  <% layout("/layouts/boilerplate") %>
 
-   <div class="row mt-3">
-    <h1 class="col-6 offset-3">Login</h1>
-      <div class="col-6 offset-3" >
-        <form action="/login" method="POST" class="needs-validation" novalidate>
-           
-      <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input name="username" id="username"  type="text" class="form-control" required/>
+
+ <% layout("/layouts/boilerplate") %>
+
+<style>
+  .login-container {
+    background: rgba(255, 255, 255, 0.2) !important; 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 3rem;
+  }
+  .login-header {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .form-label {
+    color: white !important;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .form-control {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 10px;
+    border: none;
+    padding: 0.8rem;
+  }
+
+  .form-control:focus {
+    box-shadow: 0 0 10px rgba(254, 66, 77, 0.5);
+    border: 1px solid #fe424d;
+  }
+
+  .btn-login {
+    background-color: #fe424d !important; 
+    border: none;
+    width: 100%;
+    padding: 0.8rem;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: 0.3s;
+    color: white !important;
+  }
+
+  .btn-login:hover {
+    background-color: #e33641 !important;
+    transform: scale(1.02);
+  }
+</style>
+
+<div class="row mt-5">
+  <div class="col-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+    <div class="login-container">
+      <h1 class="login-header">Login</h1>
+      
+      <form action="/login" method="POST" class="needs-validation" novalidate>
         
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input name="password" id="password"  type="text" class="form-control" required/>
-      </div>
-      <button class="btn btn-success">Login</button>
-        </form>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input name="username" id="username" type="text" class="form-control" placeholder="Enter username" required/>
+          <div class="invalid-feedback">Please enter your username.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input name="password" id="password" type="password" class="form-control" placeholder="Enter password" required/>
+          <div class="invalid-feedback">Please enter your password.</div>
+        </div>
+
+        <button class="btn btn-login">Login</button>
+      </form>
     </div>
- </div>
+  </div>
+</div>

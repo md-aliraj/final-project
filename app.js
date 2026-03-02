@@ -10,11 +10,13 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
-const MongoStore = require('connect-mongo').default;
+const MongoStore = require('connect-mongo').default; 
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+
+const Listing = require("./models/listing.js");
 
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
@@ -23,8 +25,14 @@ const userRouter = require("./routes/user.js");
 const dbUrl = process.env.ATLASDB_URL;
 
 main()
-.then(() => {
+.then(async () => {
     console.log("connect to db");
+    
+    await Listing.updateMany(
+        { category: { $exists: false } }, 
+        { $set: { category: "Trending" } }
+    );
+    // console.log("old listing updated!");
 })
 .catch((err) => {
     console.log(err);
@@ -33,6 +41,7 @@ main()
 async function main(){
     await mongoose.connect(dbUrl);
 }
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({extended: true}));
@@ -68,7 +77,6 @@ app.get("/", (req, res) => {
   res.redirect("/listings");
 });
 
-
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -81,16 +89,14 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
-     res.locals.error = req.flash("error");
-     res.locals.currUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.currUser = req.user;
     next();
 });
-
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
-
 
 app.all(/.*/, (req, res, next) => {
     next(new ExpressError(404, "Page not found!"));
@@ -104,5 +110,3 @@ app.use((err, req, res, next)=>{
 app.listen(8080, () => {
     console.log("server is listening to port 8080");
 });
-
-

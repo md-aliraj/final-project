@@ -1,14 +1,176 @@
+<style>
+  footer {
+    background: linear-gradient(to right, #2a92b5, #4ca1af, #2c3e50) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 3.5rem 0 1.5rem 0;
+    margin-top: 4rem;
+    color: white !important;
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+  }
+
+  .footer-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 3rem;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .footer-section {
+    flex: 1;
+    min-width: 200px;
+  }
+
+
+  .footer-brand-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer-brand-logo i {
+    background: #fe424d;
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+  }
+
+  .footer-section h5 {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    text-transform: capitalize;
+  }
+
+  .footer-section p, .footer-section a {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    display: block;
+    transition: 0.3s ease;
+  }
+
+  .footer-section a:hover {
+    color: white !important;
+    padding-left: 5px;
+  }
+
+  .footer-section i {
+    width: 20px;
+    margin-right: 8px;
+    color: white;
+  }
+
+
+  .subscribe-wrapper {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    display: flex;
+    padding: 5px;
+    margin-top: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .subscribe-wrapper input {
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    width: 100%;
+    outline: none;
+  }
+
+  .subscribe-wrapper input::placeholder { color: rgba(255, 255, 255, 0.7); }
+
+  .subscribe-btn {
+    background: #fe424d;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 15px;
+    color: white;
+    cursor: pointer;
+  }
+
+ 
+  .footer-bottom {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+
+  .social-icons-footer {
+    margin-bottom: 1.5rem;
+  }
+
+  .social-icons-footer a {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 15px;
+    transition: 0.3s;
+  }
+
+  .social-icons-footer a:hover { color: #fe424d; }
+
+  .copyright-text {
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
+</style>
+
 <footer>
-    <div class="f-info">
-        <div class="f-info-socials">
-            <i class="fa-brands fa-square-facebook"></i>
-            <i class="fa-brands fa-square-instagram"></i>
-            <i class="fa-brands fa-square-linkedin"></i>
-        </div>
-        <div class="f-info-brand">&copy; WanderLust Private Limited</div>
-        <div class="f-info-links">
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
-        </div>
-        </div>
+  <div class="footer-container">
+    <div class="footer-section">
+      <div class="footer-brand-logo">
+        <i class="fa-solid fa-compass"></i> WanderLust
+      </div>
+      <p>Explore the world with us. Discover hidden gems, book your stays, and make every trip unforgettable.</p>
+      <p><strong>10K+</strong> Happy Travelers<br><strong>500+</strong> Destinations</p>
+    </div>
+
+    <div class="footer-section">
+      <h5><i class="fa-solid fa-link"></i> Quick Links</h5>
+      <a href="#"><i class="fa-solid fa-circle-info"></i> About Us</a>
+      <a href="#"><i class="fa-solid fa-map-location-dot"></i> Destinations</a>
+      <a href="/privacy"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
+      <a href="/terms"><i class="fa-solid fa-file-contract"></i> Terms & Conditions</a>
+    </div>
+
+    <div class="footer-section">
+      <h5><i class="fa-solid fa-phone"></i> Contact</h5>
+      <p><i class="fa-solid fa-location-dot"></i> Bihar, India</p>
+      <p><i class="fa-solid fa-envelope"></i> ali@2026@gmail.com</p>
+      <p><i class="fa-solid fa-phone"></i> +91 7256527181</p>
+    </div>
+
+    <div class="footer-section">
+      <h5><i class="fa-solid fa-paper-plane"></i> Stay Updated</h5>
+      <p>Subscribe for travel tips & exclusive deals 🚀</p>
+      <div class="subscribe-wrapper">
+        <input type="email" placeholder="Enter your email">
+        <button class="subscribe-btn"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <p style="font-size: 0.8rem; margin-top: 10px;">✓ Weekly travel tips ✓ Exclusive deals</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="social-icons-footer">
+      <a href="#"><i class="fa-brands fa-facebook"></i></a>
+      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="#"><i class="fa-brands fa-twitter"></i></a>
+    </div>
+    <div class="copyright-text">
+      &copy; 2026 <strong>WanderLust Pvt. Ltd.</strong> | Made with ❤️ for Travelers
+    </div>
+  </div>
 </footer>
